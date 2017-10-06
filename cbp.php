@@ -10,7 +10,7 @@
     <title>DSA</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-secondary">
     <nav class="navbar navbar-dark bg-dark d-flex justify-content-around">
         <a class="navbar-brand text-center" href="#">DSA - Deep Secret Agency</a>
     </nav>
@@ -45,8 +45,8 @@
                     <div class="card-header">
                         razerbalde (level 0)
                     </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0 border-info">
+                    <div class="card-body border-info">
+                        <blockquote class="blockquote mb-0">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
                         </blockquote>
                     </div>
