@@ -29,12 +29,19 @@ $data = $stmt->fetchAll();
 
                 <div class="card bg-dark text-light">
                     <div class="card-header">
-                        <b><?= $value['user'];?></b> <small>(level <?= $value['level'];?>)</small>
+                        <b><?= $value['user'];?></b> <small>(level :<?= $value['level'];?>)</small>
                     </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                        <p><?= $value['text']; ?></p>
-                        </blockquote>
+                    <div class="card-body d-flex justify-content-center">
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapse<?= $value['id'];?>" aria-expanded="false" aria-controls="collapse<?= $value['id'];?>">
+                        See the message content
+                    </a>
+                    </div>
+                    <div class="collapse" id="collapse<?= $value['id'];?>">
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                            <p><small><?= $value['text']; ?></small></p>
+                            </blockquote>
+                        </div>
                     </div>
                 </div>
             </div>
