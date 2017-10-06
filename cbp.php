@@ -1,4 +1,12 @@
 <?php
+require 'db.php';
+$query = 'SELECT * FROM messages';
+
+$stmt = db::query($query);
+
+// var_dump($stmt);
+
+$data = $stmt->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -16,42 +24,22 @@
     </nav>
     <div class="container">
         <div class="row d-flex justify-content-center">
+            <?php foreach($data as $id => $value) : ?>
             <div class="col-10 mt-3">
+
                 <div class="card bg-dark text-light">
                     <div class="card-header">
-                        razerbalde (level 0)
+                        <b><?= $value['user'];?></b> <small>(level <?= $value['level'];?>)</small>
                     </div>
                     <div class="card-body">
                         <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                        <p><?= $value['text']; ?></p>
                         </blockquote>
                     </div>
                 </div>
             </div>
-            <div class="col-10 mt-3">
-                <div class="card bg-dark text-light">
-                    <div class="card-header">
-                        razerbalde (level 0)
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-            <div class="col-10 mt-3">
-                <div class="card bg-dark text-light">
-                    <div class="card-header">
-                        razerbalde (level 0)
-                    </div>
-                    <div class="card-body border-info">
-                        <blockquote class="blockquote mb-0">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
+
+            <?php endforeach; ?>
         </div>
     </div>
 
