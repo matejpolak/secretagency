@@ -2,34 +2,13 @@
 require 'db.php';
 require 'db_connect.php';
 
-
 if($_POST) {
-    $errors = [];
-    if(strlen($_POST['username']) == 0){
-        $errors[] = 'You didn\'t filled in your username!';
-    }
-    if(strlen($_POST['password']) == 0){
-        $errors[] = 'You didn\'t filled in your password!';
-    }
-    else {
-        // $username = $_POST['username'];
-        // $password = $_POST['password'];
-            $db = db_connect();
-            $stmt = $db->prepare('SELECT * FROM `users` WHERE `username` = ?');
-            $stmt->execute([$_POST['username']]);
-            $user = $stmt->fetch();
-            if (password_verify($_POST['password'], $user['password'])) {
-                header('Location: cbp.php');
-                exit();
-            }
-        header('Location: ?status=notok');
-    }
-}
-if(isset($_GET['status'])) {
-    $not = [];
-    if($_GET['status'] == 'notok') { 
-        $not[] = 'You didn\'t filled in correct username or password';
-    }
+    $db = db_connect();
+    $stmt= $db->prepare('INSERT INTO `users` (`username`, `password`) VALUES (?, ?)');
+    $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $stmt->execute([$_POST['username'], $hash]);
+    header('Location: login.php');
+    die;
 }
 ?>
 <!DOCTYPE html>
@@ -48,7 +27,7 @@ if(isset($_GET['status'])) {
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-4 bg-dark mt-5  rounded">
-                <h2 class="text-light mt-2">Sign Up</h2>
+                <h2 class="text-light mt-2">Register</h2>
                 <form class="pt-2 pb-1" method="post">
                     <div class="form-group">
                         <label class="text-light" for="username">Username:</label>
@@ -58,8 +37,7 @@ if(isset($_GET['status'])) {
                         <label class="text-light" for="password">Password:</label>
                         <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password">
                     </div>
-                    <button type="submit" class="btn btn-primary w-40">Sign In</button>
-                    <a type="button" href="registration.php" class="btn btn-primary w-40">Sign Up</a>
+                    <button type="submit" class="btn btn-primary w-40">Register</button>
                     <small id="emailHelp" class="form-text text-muted">Never share your login informations with anyone else.</small>
                 </form>
             </div>

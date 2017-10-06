@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require 'db2.php';
 $query = 'SELECT * FROM messages';
 
 $stmt = db::query($query);
