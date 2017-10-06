@@ -10,14 +10,24 @@ $data = $stmt->fetchAll();
 
 
 if($_POST) {
-    // $username = $_POST['username'];
-    // $password = $_POST['password'];
-    foreach ($data as $users) {
-        if(($_POST['username'] == $users['username']) && ($_POST['password'] == $users['password'])) {
-                header('Location: cbp.php');
-        } 
+    $errors = [];
+    if(strlen($_POST['username']) == 0){
+        $errors[] = 'You didn\'t filled in your username!';
+    }
+    if(strlen($_POST['password']) == 0){
+        $errors[] = 'You didn\'t filled in your password!';
+    }
+    else {
+        // $username = $_POST['username'];
+        // $password = $_POST['password'];
+        foreach ($data as $users) {
+            if(($_POST['username'] == $users['username']) && ($_POST['password'] == $users['password'])) {
+                    header('Location: cbp.php');
+            } 
+        }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +59,19 @@ if($_POST) {
                     <button type="submit" class="btn btn-primary w-40">Sign Up</button>
                     <small id="emailHelp" class="form-text text-muted">Never share your login informations with anyone else.</small>
                 </form>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-4 mt-3 px-3">
+                <div class="error">
+                    <?php if(isset($errors)): ?>
+                        <?php foreach($errors as $message): ?>
+                            <div class="alert alert-danger w-100" role="alert">
+                                <?=$message;?>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
